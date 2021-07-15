@@ -28,7 +28,7 @@ import { RestaurantsService } from './restaurants/restaurants.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
