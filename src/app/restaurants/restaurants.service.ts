@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EMPTY, Observable } from 'rxjs';
 import { MEAT_API } from '../app.api';
-import { catchError, map } from 'rxjs/operators'
 import { ToastrService } from 'ngx-toastr';
+import { catchError, map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,12 @@ export class RestaurantsService {
 
   exibirMensagem(titulo: string, mensagem: string, tipo: string): void {
     this.toastr.show(mensagem, titulo, { closeButton: true, progressBar: true }, tipo)
+  }
+
+  restaurantById(id: String): Observable<Restaurant> {
+    return this.http.get<Restaurant>(`${MEAT_API}/restaurants/${id}`).pipe(
+      map(restaurants => restaurants),
+      catchError(erro => this.exibeErro(erro))
+    )
   }
 }
